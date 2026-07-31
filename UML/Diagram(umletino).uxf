@@ -1,0 +1,92 @@
+<diagram program="umletino" version="15.1"><zoom_level>5</zoom_level><element><id>UMLClass</id><coordinates><x>505</x><y>85</y><w>105</w><h>60</h></coordinates><panel_attributes>RandomIndex
+--
++indexes: list&lt;int&gt;
+-tmp_index: int
+--
++RandomIndex(i_len: int)
++set_random_index()
++delete_index()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>185</y><w>190</w><h>40</h></coordinates><panel_attributes>RandomLearn
+--
++RandomLearn()
+_+learn(foreign_words: list[str], local_words: list[str])_</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>715</x><y>590</y><w>185</w><h>65</h></coordinates><panel_attributes>ListsManager
+--
+-local_words:list&lt;str&gt;
+-foreign_words:list&lt;str&gt;
+--
++delete_words(foreign_word: str, local_word:str)
++add_words(foreign_word: str, local_word:str)
++get_local_words(): list&lt;str&gt;
++get_foreign_words(): list&lt;str&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1070</x><y>145</y><w>170</w><h>45</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+/TextFileManager/
+--
+--
+/+create_word_lists(): tuple&lt;list&lt;str&gt;, list&lt;str&gt;&gt;/
+/+write_text_file(foreign_words: list&lt;str&gt;, local_words: list&lt;str&gt;)/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1195</x><y>220</y><w>185</w><h>50</h></coordinates><panel_attributes>TwoTextFilesManager
+--
+-file_addreses: list&lt;str&gt;
+--
++TwoTextFilesManager(file_addresses: list&lt;str&gt;)
++create_word_lists(): tuple&lt;list&lt;str&gt;, list&lt;str&gt;&gt;
++write_text_file(foreign_words: list&lt;str&gt;, local_words: list&lt;str&gt;)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>995</x><y>220</y><w>185</w><h>50</h></coordinates><panel_attributes>OneTextFilesManager
+--
+-file_names: str
+--
++OneTextFilesManager(file_names: str)
++create_word_lists(): tuple&lt;list&lt;str&gt;, list&lt;str&gt;&gt;
++write_text_file(foreign_words: list&lt;str&gt;, local_words: list&lt;str&gt;)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1095</x><y>185</y><w>15</w><h>45</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>1210</x><y>185</y><w>15</w><h>45</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>705</x><y>670</y><w>125</w><h>40</h></coordinates><panel_attributes>WordBatchCreator
+--
+--
+_+create_word_batch(name: str)_</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>765</x><y>390</y><w>145</w><h>110</h></coordinates><panel_attributes>WordBatchManager
+--
+-name: str 
+-local_refresh_time: list&lt;int&gt;
+-refresh_history: list&lt;int&gt;
+-learn_date: date
+--
++WordBatchManager()
++get_name(): str
++set_name(name: str)
++remaining_time_calculate(): int
++rewrite_start_time(new_date: date)
++add_stage()
++delete_last_stage()
++set_new_settings()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>495</y><w>160</w><h>80</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+/Query/
+--
+/+prompt(): str/
+/+command_select(command: str, *args, **kwargs)/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>495</x><y>665</y><w>150</w><h>50</h></coordinates><panel_attributes>CreateBatchQuery
+--
++prompt():str
++command_select(command: str, *args, **kwargs)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>495</x><y>270</y><w>150</w><h>50</h></coordinates><panel_attributes>LearnWordsQuery
+--
+
+--
+_+select_text_manager(name: str) -&gt; OneTextFileManager_
++prompt():str
++command_select(command: str, *args, **kwargs)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>495</x><y>750</y><w>150</w><h>50</h></coordinates><panel_attributes>ChangeBatchSettingsQuery
+--
+-queries: list&lt;Query&gt;
+--
++prompt():str
++command_select(command: str, *args, **kwargs)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>495</x><y>565</y><w>150</w><h>50</h></coordinates><panel_attributes>ChangeBatchWordsQuery
+--
++prompt():str
++command_select(command: str, *args, **kwargs)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>205</x><y>410</y><w>105</w><h>60</h></coordinates><panel_attributes>QueryRequest
+--
+-queries: list&lt;Query&gt;
+--
++QueryRequest(queries: list&lt;Query&gt;)
++print_prompts()
++search_query(command)
++query_select()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>465</y><w>15</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>495</x><y>430</y><w>150</w><h>50</h></coordinates><panel_attributes>RamainingTimeCalculateQuery
+--
++prompt():str
++command_select(command: str, *args, **kwargs)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>495</x><y>495</y><w>150</w><h>50</h></coordinates><panel_attributes>HistoryDeleteQuery
+--
++prompt():str
++command_select(command: str, *args, **kwargs)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>495</x><y>365</y><w>150</w><h>50</h></coordinates><panel_attributes>HistoryAddQuery
+--
++prompt():str
++command_select(command: str, *args, **kwargs)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>335</x><y>285</y><w>170</w><h>265</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;510;140;510;140;10;320;10</additional_attributes></element><element><id>Relation</id><coordinates><x>400</x><y>445</y><w>105</w><h>15</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;190;10</additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>140</y><w>15</w><h>55</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>640</x><y>265</y><w>435</w><h>40</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>850;10;850;50;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>640</x><y>680</y><w>75</w><h>15</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>640</x><y>445</y><w>135</w><h>15</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>250;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>640</x><y>600</y><w>85</w><h>15</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>150;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>400</x><y>535</y><w>15</w><h>250</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;480;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>640</x><y>265</y><w>465</w><h>315</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>900;10;910;600;10;610</additional_attributes></element><element><id>Relation</id><coordinates><x>400</x><y>510</y><w>105</w><h>15</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>190;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>400</x><y>685</y><w>105</w><h>15</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>190;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>400</x><y>770</y><w>105</w><h>15</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>190;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>570</y><w>225</w><h>230</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>430;440;10;440;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>640</x><y>495</y><w>185</w><h>30</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>350;10;350;40;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>640</x><y>395</y><w>135</w><h>15</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>250;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>220</y><w>15</w><h>60</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>400</x><y>380</y><w>105</w><h>15</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;190;10</additional_attributes></element><element><id>Relation</id><coordinates><x>565</x><y>315</y><w>15</w><h>60</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;100;10;10</additional_attributes></element></diagram>
