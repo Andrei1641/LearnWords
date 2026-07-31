@@ -3,11 +3,11 @@ from abc import abstractmethod, ABC
 class TextFileManager(ABC):
 
     @abstractmethod
-    def create_word_lists(self) -> tuple[list[str], list[str]]:
+    def create_word_set(self) -> set[tuple[str, str]]:
         ...
 
     @abstractmethod
-    def write_text_file(self, foreign_words: list[str], local_words: list[str]):
+    def write_text_file(self, words: set[tuple[str, str]]):
         ...
 
 
@@ -17,7 +17,7 @@ class OneTextFileManager(TextFileManager):
         self.__file_names = file_names
 
 
-    def create_word_lists(self) -> tuple[list[str], list[str]]:
+    def create_word_set(self) -> set[tuple[str, str]]:
         raw_text: str = ''
 
         try:
@@ -31,27 +31,26 @@ class OneTextFileManager(TextFileManager):
         for word_par in word_pars:
             parts.append(word_par.split('='))
 
-        foreign_words = []
-        local_words = []
+        words_set: set[tuple[str, str]] = set()
         try:
-            foreign_words = [f.strip() for f, l in parts]
-            local_words = [l.strip() for f,l in parts]
+            words_set = [(f.strip(), l.strip()) for f, l in parts]
         except ValueError:
             raise ValueError(f'the batch {self.__file_names} is empty')
 
-        return foreign_words, local_words
+        return words_set
 
 
-    def write_text_file(self, foreign_words: list[str], local_words: list[str]):
+    def write_text_file(self, words: set[tuple[str, str]]):
         word_pars: list[str] = []
-        for i in range(len(foreign_words)):
-            word_pars.append(f'{foreign_words[i]} = {local_words[i]}')
+        for word in words:
+            word_pars.append(f'{word[0]} = {word[1]}')
 
         raw_text = '\n'.join(word_pars)
-
-        with open(f'words/{self.__file_names}/words.txt', 'w') as f:
-            f.write(raw_text)
-
+        try:
+            with open(f'words/{self.__file_names}/words.txt', 'w') as f:
+                f.write(raw_text)
+        except FileNotFoundError:
+            raise FileNotFoundError(f'file {self.__file_names} does not exist')
 
 
 
@@ -59,8 +58,8 @@ class TwoTextFileManager(TextFileManager):
     def __init__(self, file_addresses: list[str]):
         self.__file_addresses = file_addresses
 
-    def create_word_lists(self) -> tuple[list[str], list[str]]:
+    def create_word_set(self) -> set[tuple[str, str]]:
         ...
 
-    def write_text_file(self, foreign_words: list[str], local_words: list[str]):
+    def write_text_file(self, words: set[tuple[str, str]]):
         ...

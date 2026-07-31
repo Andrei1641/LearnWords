@@ -24,10 +24,9 @@ class LearnWordsQuery(Query):
 
             for batch_name in batch_names:
                 text_manager = LearnWordsQuery.select_text_manager(batch_name)
-                foreign_words_tmp = ''
-                local_words_tmp = ''
+
                 try:
-                    foreign_words_tmp, local_words_tmp = text_manager.create_word_lists()
+                    words_set = text_manager.create_word_set()
                 except ValueError as e:
                     print(e)
                     continue
@@ -35,8 +34,9 @@ class LearnWordsQuery(Query):
                     print(e)
                     continue
 
-                foreign_words += foreign_words_tmp
-                local_words += local_words_tmp
+                for word in words_set:
+                    foreign_words.append(word[0])
+                    local_words.append(word[1])
             print()
             if foreign_words and local_words:
                 RandomLearn().learn(foreign_words, local_words)

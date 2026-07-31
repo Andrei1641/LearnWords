@@ -16,18 +16,20 @@ class ChangeBatchWordsQuery(Query):
     def command_select(self, command: str, *args, **kwargs):
         if command == 'cbw':
             batch_select: str = input('select batch: ')
-            text_manager = self.select_text_manager(batch_select)
             change = True
-            foreign_words, local_words = [],[]
+            text_manager = None
+            words_set: set[tuple[str, str]] = set()
             try:
-                foreign_words, local_words = text_manager.create_word_lists()
-            except ValueError:
-                pass
+                text_manager = self.select_text_manager(batch_select)
+                words_set = text_manager.create_word_set()
             except FileNotFoundError as e:
                 print(e)
                 change = False
+            except ValueError:
+                pass
 
-            lists_manager = ListsManager(foreign_words, local_words)
+
+            lists_manager = ListsManager(words_set)
 
 
             while change:
@@ -56,5 +58,7 @@ class ChangeBatchWordsQuery(Query):
                 if command == 'q':
                     change = False
 
-
-            text_manager.write_text_file(lists_manager.foreign_words, lists_manager.local_words)
+            try:
+                text_manager.write_text_file(lists_manager.words_set)
+            except FileNotFoundError:
+                pass
