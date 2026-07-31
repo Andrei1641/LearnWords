@@ -16,3 +16,6 @@ venv/
 # Build files
 dist/
 build/
+
+words/*
+!words/.gitkeep
