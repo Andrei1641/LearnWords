@@ -2,21 +2,33 @@ import random
 
 class RandomIndex:
     def __init__(self, i_len: int):
-        self.indexes: list[int] = [i for i in range(0, i_len)]
-        self.tmp_index: int = -1
+        self.__indexes: list[int] = [i for i in range(0, i_len)]
+        self.__tmp_index: int = -1
+
+
+    @property
+    def tmp_index(self) -> int:
+        return self.__tmp_index
+
+    @property
+    def indexes(self) -> list[int]:
+        return self.__indexes
+
+    def reset_indexes(self):
+        self.__indexes = []
 
 
     def set_random_index(self):
-        i = random.randint(0, len(self.indexes) - 1)
-        if len(self.indexes) != 1:
-            while self.tmp_index == i:
-                i = random.randint(0, len(self.indexes) - 1)
+        i = random.randint(0, len(self.__indexes) - 1)
+        if len(self.__indexes) != 1:
+            while self.__tmp_index == i:
+                i = random.randint(0, len(self.__indexes) - 1)
 
-        self.tmp_index = i
+        self.__tmp_index = i
 
 
     def delete_index(self):
-        self.indexes.pop(self.tmp_index)
+        self.__indexes.pop(self.__tmp_index)
 
 
 
@@ -40,6 +52,8 @@ class RandomLearn:
             else:
                 print(f'there is no such a mode{mode_request} there is (f-l, l-f)')
 
-            command = input('print 0 to delete or just press enter to continue: ')
+            command = input('print 0 to delete or just press enter to continue(q to quit): ')
             if command == '0':
                 random_select.delete_index()
+            elif command == 'q':
+                random_select.reset_indexes()
