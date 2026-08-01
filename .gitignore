@@ -19,3 +19,5 @@ build/
 
 words/*
 !words/.gitkeep
+!words/example_one_txt_file
+!words/example_two_txt_files

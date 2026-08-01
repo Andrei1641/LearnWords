@@ -1,14 +1,12 @@
 from queries.history_add import HistoryAddQuery
 from queries.query import Query
 from random_select import RandomLearn
-from text_file_manager import OneTextFileManager
+from select_text_file_manager import SelectTextFileManager
 
 
 
 class LearnWordsQuery(Query):
-    @staticmethod
-    def select_text_manager(name: str):
-        return OneTextFileManager(name)
+
 
     def prompt(self) -> str:
         return 'print lw to learn words'
@@ -23,7 +21,8 @@ class LearnWordsQuery(Query):
             batch_names: list[str] = raw_names.split(',')
 
             for batch_name in batch_names:
-                text_manager = LearnWordsQuery.select_text_manager(batch_name)
+                select_t_m = SelectTextFileManager()
+                text_manager = select_t_m.select(batch_name)
                 words_set: set[tuple[str, str]] = set()
                 try:
                     words_set = text_manager.create_word_set()

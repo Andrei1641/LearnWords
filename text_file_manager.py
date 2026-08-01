@@ -55,11 +55,30 @@ class OneTextFileManager(TextFileManager):
 
 
 class TwoTextFileManager(TextFileManager):
-    def __init__(self, file_addresses: list[str]):
-        self.__file_addresses = file_addresses
+    def __init__(self, file_name: str):
+        self.__file_name = file_name
 
     def create_word_set(self) -> set[tuple[str, str]]:
-        ...
+        foreign_words: list[str] = []
+        local_words: list[str] = []
+        with open(f'words/{self.__file_name}/words_f.txt', 'r') as f:
+            raw_foreign_words: str = f.read()
+            foreign_words = raw_foreign_words.split('\n')
+
+        with open(f'words/{self.__file_name}/words_l.txt', 'r') as f:
+            raw_local_words: str = f.read()
+            local_words = raw_local_words.split('\n')
+
+        word_set: set[tuple[str, str]] = set(zip(foreign_words, local_words))
+        return word_set
 
     def write_text_file(self, words: set[tuple[str, str]]):
-        ...
+        foreign_words, local_words = zip(*words)
+
+        raw_foreign_words = '\n'.join(foreign_words)
+        raw_local_words = '\n'.join(local_words)
+
+        with open(f'words/{self.__file_name}/words_f.txt', 'w') as f:
+            f.write(raw_foreign_words)
+        with open(f'words/{self.__file_name}/words_l.txt', 'w') as f:
+            f.write(raw_local_words)

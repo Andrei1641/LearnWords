@@ -1,13 +1,10 @@
 from lists_manager import ListsManager
 from queries.query import Query
-from text_file_manager import OneTextFileManager
+from select_text_file_manager import SelectTextFileManager
 
 
 class ChangeBatchWordsQuery(Query):
 
-    @staticmethod
-    def select_text_manager(name: str):
-        return OneTextFileManager(name)
 
 
     def prompt(self) -> str:
@@ -20,7 +17,8 @@ class ChangeBatchWordsQuery(Query):
             text_manager = None
             words_set: set[tuple[str, str]] = set()
             try:
-                text_manager = self.select_text_manager(batch_select)
+                select_t_m = SelectTextFileManager()
+                text_manager = select_t_m.select(batch_select)
                 words_set = text_manager.create_word_set()
             except FileNotFoundError as e:
                 print(e)
