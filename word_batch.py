@@ -2,10 +2,6 @@ import json
 from datetime import date, timedelta
 
 
-
-
-
-
 class WordBatchManager:
     def __init__(self):
         self.__name: str = ''

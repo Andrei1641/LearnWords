@@ -1,3 +1,4 @@
+from delete_batch import DeleteBatchQuery
 from queries.change_batch_settings import ChangeBatchSettingsQuery
 from queries.change_batch_words import ChangeBatchWordsQuery
 from queries.create_batch import CreateBatchQuery
@@ -12,7 +13,7 @@ from queries.ramaining_time_calculate import RemainingTimeCalculateQuery
 queries: list[Query] = [
                         ChangeBatchSettingsQuery([HistoryDeleteQuery(), HistoryAddQuery()]),
                         ChangeBatchWordsQuery(), CreateBatchQuery(),
-                        LearnWordsQuery(), RemainingTimeCalculateQuery()
+                        LearnWordsQuery(), RemainingTimeCalculateQuery(), DeleteBatchQuery()
                        ]
 
 query_request = QueryRequest(queries)
