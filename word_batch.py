@@ -25,7 +25,7 @@ class WordBatchManager:
         self.__name: str = ''
         self.__local_refresh_time: list[int] = []
         self.__refresh_history: list[int] = []
-        self.__learn_date: date = date(0, 0, 0)
+        self.__learn_date: date = date(1, 1, 1)
 
 
     @property
