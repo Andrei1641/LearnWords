@@ -1,4 +1,4 @@
-from queries.history_add import HistoryAddQuery
+from queries.batch_settings.history_add import HistoryAddQuery
 from queries.query import Query
 from random_select import RandomLearn
 from select_text_file_manager import SelectTextFileManager

@@ -6,7 +6,7 @@ from pathlib import Path
 
 class DeleteBatchQuery(Query):
     @staticmethod
-    def delete_batch(name):
+    def __delete_batch(name: str):
         path = Path(f'words/{name}')
         if path.exists():
             shutil.rmtree(path)
@@ -21,6 +21,6 @@ class DeleteBatchQuery(Query):
         if command == 'dlb':
             name = input('write name of a word batch, you want to delete: ')
             try:
-                DeleteBatchQuery().delete_batch(name)
+                DeleteBatchQuery().__delete_batch(name)
             except FileNotFoundError as e:
                 print(e)
