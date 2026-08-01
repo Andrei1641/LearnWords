@@ -1,22 +1,8 @@
 import json
 from datetime import date, timedelta
-import os
 
 
-class WordBatchCreator:
 
-    @staticmethod
-    def create_word_batch(name: str):
-
-        template = {"refresh_time" : [],
-                    "refresh_history" : [],
-                    "creation_date" : f"{date.today()}"}
-
-        os.makedirs(f'words/{name}', exist_ok=True)
-        with open(f'words/{name}/local_settings.json', 'x') as f:
-            json.dump(template,f, indent=5)
-
-        open(f'words/{name}/words.txt', 'x').close()
 
 
 
