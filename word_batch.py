@@ -81,6 +81,9 @@ class WordBatchManager:
             print('you are done with learning of the batch')
 
 
+    def local_refresh_change(self, new_refresh_time: list[int]):
+        self.__local_refresh_time = new_refresh_time
+
 
     def delete_last_stage(self):
         try:
