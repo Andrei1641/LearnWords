@@ -14,4 +14,4 @@ class SelectTextFileManager:
         if path_standard.exists():
             return OneTextFileManager(name)
 
-        raise FileNotFoundError(f'{name} has false structure')
+        raise FileNotFoundError(f'{name} does not exist')
