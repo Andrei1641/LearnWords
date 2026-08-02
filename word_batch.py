@@ -20,7 +20,7 @@ class WordBatchManager:
         self.__name = name
         creation_date_str: str = ''
 
-        with open(f'words/{self.__name}/local_settings.json', 'r') as f:
+        with open(f'words/{self.__name}/local_settings.json', 'r', encoding='utf-8') as f:
             settings = json.load(f)
             creation_date_str = settings['creation_date']
             self.__refresh_history = settings['refresh_history']
@@ -37,7 +37,7 @@ class WordBatchManager:
 
         refresh_time = self.__local_refresh_time
         if not refresh_time:
-            with open('settings/global_words_settings/refresh.json', 'r') as f:
+            with open('settings/global_words_settings/refresh.json', 'r', encoding='utf-8') as f:
                 global_settings = json.load(f)
                 refresh_time = global_settings['refresh_time']
 
@@ -71,7 +71,7 @@ class WordBatchManager:
     def add_stage(self):
         refresh_time = self.__local_refresh_time
         if not refresh_time:
-            with open('settings/global_words_settings/refresh.json', 'r') as f:
+            with open('settings/global_words_settings/refresh.json', 'r', encoding='utf-8') as f:
                 global_settings = json.load(f)
                 refresh_time = global_settings['refresh_time']
 
@@ -97,5 +97,5 @@ class WordBatchManager:
                         "refresh_history": self.__refresh_history,
                         "creation_date": f"{self.__learn_date}"}
 
-        with open(f'words/{self.__name}/local_settings.json', 'w') as f:
+        with open(f'words/{self.__name}/local_settings.json', 'w', encoding='utf-8') as f:
             json.dump(new_settings, f, indent=5)

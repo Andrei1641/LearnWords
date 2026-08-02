@@ -20,7 +20,7 @@ class OneTextFileManager(TextFileManager):
         raw_text: str = ''
 
         try:
-            with open(f'words/{self._name}/words.txt', 'r') as f:
+            with open(f'words/{self._name}/words.txt', 'r', encoding='utf-8') as f:
                 raw_text = f.read()
         except FileNotFoundError:
             raise FileNotFoundError(f'file {self._name} does not exist')
@@ -42,7 +42,7 @@ class OneTextFileManager(TextFileManager):
 
         raw_text: str = '\n'.join(word_pairs)
         try:
-            with open(f'words/{self._name}/words.txt', 'w') as f:
+            with open(f'words/{self._name}/words.txt', 'w', encoding='utf-8') as f:
                 f.write(raw_text)
         except FileNotFoundError:
             raise FileNotFoundError(f'file {self._name} does not exist')
@@ -53,10 +53,10 @@ class TwoTextFileManager(TextFileManager):
     def create_word_set(self) -> set[tuple[str, str]]:
         foreign_words: list[str] = []
         local_words: list[str] = []
-        with open(f'words/{self._name}/words_f.txt', 'r') as f:
+        with open(f'words/{self._name}/words_f.txt', 'r', encoding='utf-8') as f:
             foreign_words = f.read().splitlines()
 
-        with open(f'words/{self._name}/words_l.txt', 'r') as f:
+        with open(f'words/{self._name}/words_l.txt', 'r', encoding='utf-8') as f:
             local_words = f.read().splitlines()
 
         word_set: set[tuple[str, str]] = set(zip(foreign_words, local_words))
@@ -69,7 +69,7 @@ class TwoTextFileManager(TextFileManager):
         raw_foreign_words = '\n'.join(foreign_words)
         raw_local_words = '\n'.join(local_words)
 
-        with open(f'words/{self._name}/words_f.txt', 'w') as f:
+        with open(f'words/{self._name}/words_f.txt', 'w', encoding='utf-8') as f:
             f.write(raw_foreign_words)
-        with open(f'words/{self._name}/words_l.txt', 'w') as f:
+        with open(f'words/{self._name}/words_l.txt', 'w', encoding='utf-8') as f:
             f.write(raw_local_words)
