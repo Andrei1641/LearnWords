@@ -1,4 +1,4 @@
-from delete_batch import DeleteBatchQuery
+from queries.delete_batch import DeleteBatchQuery
 from queries.batch_settings.change_batch_settings import ChangeBatchSettingsQuery
 from queries.batch_settings.change_local_refresh_time import ChangeLocalRefreshTime
 from queries.batch_settings.rename_batch import RenameBatchQuery
