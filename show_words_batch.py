@@ -1,0 +1,11 @@
+from select_text_file_manager import SelectTextFileManager
+from text_file_manager import TextFileManager
+
+
+class ShowWordsBatch:
+    @staticmethod
+    def show(name: str):
+        text_file_manager: TextFileManager = SelectTextFileManager.select(name)
+        word_set: set[tuple[str,str]] = text_file_manager.create_word_set()
+        for word_pair in word_set:
+            print(f'{word_pair[0]} = {word_pair[1]}')

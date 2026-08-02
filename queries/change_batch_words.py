@@ -37,6 +37,11 @@ class ChangeBatchWordsQuery(Query):
 
                 change_mode: bool = True
                 while change_mode:
+
+                    w_s: set[tuple[str, str]] = lists_manager.words_set
+                    for word_pair in w_s:
+                        print(f'{word_pair[0]} = {word_pair[1]}')
+
                     print_words = input('print words(foreign, local): ')
                     print_words = print_words.replace(' ', '')
                     words = print_words.split(',')

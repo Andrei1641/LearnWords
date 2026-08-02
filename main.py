@@ -10,12 +10,12 @@ from queries.learn_words import LearnWordsQuery
 from queries.query import Query
 from queries.query_request import QueryRequest
 from queries.ramaining_time_calculate import RemainingTimeCalculateQuery
-
+from queries.show_batch import ShowBatchQuery
 
 queries: list[Query] = [
                         ChangeBatchSettingsQuery([HistoryDeleteQuery(), HistoryAddQuery(), RenameBatchQuery(), ChangeLocalRefreshTime()]),
                         ChangeBatchWordsQuery(), CreateBatchQuery(),
-                        LearnWordsQuery(), RemainingTimeCalculateQuery(), DeleteBatchQuery()
+                        LearnWordsQuery(), RemainingTimeCalculateQuery(), DeleteBatchQuery(), ShowBatchQuery()
                        ]
 
 query_request = QueryRequest(queries)
