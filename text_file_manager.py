@@ -26,7 +26,7 @@ class OneTextFileManager(TextFileManager):
             raise FileNotFoundError(f'file {self._name} does not exist')
 
 
-        parts: list[list[str]] = [word_par.split() for word_par in raw_text.splitlines()]
+        parts: list[list[str]] = [word_par.split('=') for word_par in raw_text.splitlines()]
 
         words_set: set[tuple[str, str]] = set()
         try:
@@ -38,7 +38,7 @@ class OneTextFileManager(TextFileManager):
 
 
     def write_text_file(self, words: set[tuple[str, str]]):
-        word_pairs = ['\n'.join(f'{f} = {l}') for f, l in words]
+        word_pairs = [f'{f} = {l}' for f, l in words]
 
         raw_text: str = '\n'.join(word_pairs)
         try:
