@@ -55,7 +55,7 @@ class ChangeBatchWordsQuery(Query):
 
         try:
             text_manager.write_text_file(lists_manager.words_set)
-        except FileNotFoundError:
+        except (FileNotFoundError, AttributeError):
             pass
 
 
