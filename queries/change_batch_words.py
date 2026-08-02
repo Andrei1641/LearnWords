@@ -34,9 +34,9 @@ class ChangeBatchWordsQuery(Query):
                 for word_pair in w_s:
                     print(f'{word_pair[0]} = {word_pair[1]}')
 
-                print_words = input('print words(foreign, local): ')
-                print_words = print_words.replace(' ', '')
-                words = print_words.split(',')
+                print_words: str = input('print words(foreign, local): ')
+                words: list[str] = [word.strip() for word in print_words.split(',')]
+
                 try:
                     if select_change_mode == 'del':
                         lists_manager.delete_word(words[0], words[1])

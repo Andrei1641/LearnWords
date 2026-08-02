@@ -23,7 +23,7 @@ class ChangeBatchSettingsQuery(Query):
                 for query in self.__queries:
                     query.command_select(next_command, batch_name)
 
-                command: str = input('press enter to continue history changing or q to return in menu')
+                command: str = input('press enter to continue history changing or q to return in menu: ')
                 if command == 'q':
                     change = False
         else:

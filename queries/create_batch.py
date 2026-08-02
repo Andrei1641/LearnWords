@@ -31,6 +31,6 @@ class CreateBatchQuery(Query):
             while not ex:
                 name = input('write name of new word batch: ')
                 CreateBatchQuery.__create_word_batch(name)
-                command = input('press enter to return in menu or print 1 to create another one')
+                command = input('press enter to return in menu or print 1 to create another one: ')
                 if not command:
                     ex = True

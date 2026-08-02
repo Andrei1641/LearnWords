@@ -33,6 +33,14 @@ class RandomIndex:
 
 
 class RandomLearn:
+
+    @staticmethod
+    def __learn_sequence(first: list[str], second: list[str], i: int):
+        print(first[i])
+        input('press enter to translate')
+        print(second[i])
+
+
     @staticmethod
     def learn(foreign_words: list[str], local_words: list[str]):
         mode_request:str = input('select learning mode(l-f or f-l): ')
@@ -41,12 +49,14 @@ class RandomLearn:
 
         if mode_request == 'l-f':
             print('local words = foreign words')
+            print('-----------------------------')
             for i in range(len(foreign_words)):
                 print(f'{local_words[i]} = {foreign_words[i]}')
         elif mode_request == 'f-l':
-            print('foreign words = local words', end='\n\n')
+            print('foreign words = local words')
+            print('-----------------------------')
             for i in range(len(foreign_words)):
-                print(f'{foreign_words[i]} = {local_words[i]}', end='\n\n')
+                print(f'{foreign_words[i]} = {local_words[i]}')
         else:
             print(f'there is no such a mode{mode_request} there is (f-l, l-f)')
             random_select.reset_indexes()
@@ -54,13 +64,9 @@ class RandomLearn:
         while random_select.indexes:
             random_select.set_random_index()
             if mode_request == 'l-f':
-                print(local_words[random_select.tmp_index])
-                input('press enter to translate')
-                print(foreign_words[random_select.tmp_index])
+                RandomLearn.__learn_sequence(local_words, foreign_words, random_select.tmp_index)
             elif mode_request == 'f-l':
-                print(foreign_words[random_select.tmp_index])
-                input('press enter to translate')
-                print(local_words[random_select.tmp_index])
+                RandomLearn.__learn_sequence(foreign_words, local_words, random_select.tmp_index)
 
 
             command = input('print 0 to delete or just press enter to continue(q to quit): ')

@@ -14,7 +14,7 @@ class HistoryDeleteQuery(Query):
         while delete:
             word_batch_manager.delete_last_stage()
 
-            command = input('print enter to delete another one last refresh time or q to exit')
+            command = input('print enter to delete another one last refresh time or q to exit: ')
             if command == 'q':
                 delete = False
                 word_batch_manager.set_new_settings()

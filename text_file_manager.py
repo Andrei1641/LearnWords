@@ -25,14 +25,12 @@ class OneTextFileManager(TextFileManager):
         except FileNotFoundError:
             raise FileNotFoundError(f'file {self._name} does not exist')
 
-        word_pars = raw_text.split('\n')
-        parts: list[list[str]] = []
-        for word_par in word_pars:
-            parts.append(word_par.split('='))
+
+        parts: list[list[str]] = [word_par.split() for word_par in raw_text.splitlines()]
 
         words_set: set[tuple[str, str]] = set()
         try:
-            words_set = [(f.strip(), l.strip()) for f, l in parts]
+            words_set = {(f.strip(), l.strip()) for f, l in parts}
         except ValueError:
             raise ValueError(f'the batch {self._name} is empty')
 
@@ -40,17 +38,14 @@ class OneTextFileManager(TextFileManager):
 
 
     def write_text_file(self, words: set[tuple[str, str]]):
-        word_pars: list[str] = []
-        for word in words:
-            word_pars.append(f'{word[0]} = {word[1]}')
+        word_pairs = ['\n'.join(f'{f} = {l}') for f, l in words]
 
-        raw_text = '\n'.join(word_pars)
+        raw_text: str = '\n'.join(word_pairs)
         try:
             with open(f'words/{self._name}/words.txt', 'w') as f:
                 f.write(raw_text)
         except FileNotFoundError:
             raise FileNotFoundError(f'file {self._name} does not exist')
-
 
 
 class TwoTextFileManager(TextFileManager):
@@ -59,15 +54,14 @@ class TwoTextFileManager(TextFileManager):
         foreign_words: list[str] = []
         local_words: list[str] = []
         with open(f'words/{self._name}/words_f.txt', 'r') as f:
-            raw_foreign_words: str = f.read()
-            foreign_words = raw_foreign_words.split('\n')
+            foreign_words = f.read().splitlines()
 
         with open(f'words/{self._name}/words_l.txt', 'r') as f:
-            raw_local_words: str = f.read()
-            local_words = raw_local_words.split('\n')
+            local_words = f.read().splitlines()
 
         word_set: set[tuple[str, str]] = set(zip(foreign_words, local_words))
         return word_set
+
 
     def write_text_file(self, words: set[tuple[str, str]]):
         foreign_words, local_words = zip(*words)

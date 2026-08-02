@@ -13,7 +13,7 @@ class HistoryAddQuery(Query):
         while add:
             word_batch_manager.add_stage()
 
-            command = input('print enter to complete another refresh stage or q to exit')
+            command = input('print enter to complete another refresh stage or q to exit: ')
             if command == 'q':
                 add = False
                 word_batch_manager.set_new_settings()
