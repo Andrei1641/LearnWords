@@ -1,5 +1,6 @@
 import json
 import os
+import subprocess
 from datetime import date
 
 from queries.query import Query
@@ -31,6 +32,7 @@ class CreateBatchQuery(Query):
             while not ex:
                 name = input('write name of new word batch: ')
                 CreateBatchQuery.__create_word_batch(name)
-                command = input('press enter to return in menu or print 1 to create another one: ')
-                if not command:
+                command = input('press q to return in menu or enter to create another one: ')
+                subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
+                if command == 'q':
                     ex = True

@@ -1,3 +1,6 @@
+import os
+import subprocess
+
 from lists_manager import ListsManager
 from queries.query import Query
 from select_text_file_manager import SelectTextFileManager
@@ -33,6 +36,7 @@ class ChangeBatchWordsQuery(Query):
                 w_s: set[tuple[str, str]] = lists_manager.words_set
                 for word_pair in w_s:
                     print(f'{word_pair[0]} = {word_pair[1]}')
+                print(f'(there are {len(w_s)} word pairs)')
 
                 print_words: str = input('print words(foreign, local): ')
                 words: list[str] = [word.strip() for word in print_words.split(',')]
@@ -46,10 +50,12 @@ class ChangeBatchWordsQuery(Query):
                     print('false form')
 
                 command: str = input(f'press enter to continue {select_change_mode}, or q to exit: ')
+                subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
                 if command == 'q':
                     change_mode = False
 
             command = input('press enter to continue batch word changing or q to return in menu: ')
+            subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
             if command == 'q':
                 change = False
 
@@ -67,3 +73,4 @@ class ChangeBatchWordsQuery(Query):
             batch_name: str = input('select batch: ')
 
             ChangeBatchWordsQuery.__change_batch_words(batch_name)
+            subprocess.run("cls" if os.name == "nt" else "clear", shell=True)

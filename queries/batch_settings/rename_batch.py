@@ -1,3 +1,6 @@
+import os
+import subprocess
+
 from queries.query import Query
 from pathlib import Path
 
@@ -16,3 +19,5 @@ class RenameBatchQuery(Query):
         if command == 'rnb':
             new_name: str = input('print new name: ')
             RenameBatchQuery.__rename_batch(new_name, args[0])
+            subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
+

@@ -1,3 +1,6 @@
+import os
+import subprocess
+
 from queries.query import Query
 from word_batch import WordBatchManager
 
@@ -24,5 +27,5 @@ class ChangeLocalRefreshTime(Query):
 
             time_list: list[int] = [int(t) for t in new_refresh_times]
 
-
             ChangeLocalRefreshTime.__change(args[0], time_list)
+            subprocess.run("cls" if os.name == "nt" else "clear", shell=True)

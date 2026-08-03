@@ -1,4 +1,6 @@
+import os
 import shutil
+import subprocess
 
 from queries.query import Query
 from pathlib import Path
@@ -20,6 +22,7 @@ class DeleteBatchQuery(Query):
     def command_select(self, command: str, *args, **kwargs):
         if command == 'dlb':
             name = input('write name of a word batch, you want to delete: ')
+            subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
             try:
                 DeleteBatchQuery().__delete_batch(name)
             except FileNotFoundError as e:

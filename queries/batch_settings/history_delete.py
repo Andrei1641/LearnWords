@@ -1,3 +1,6 @@
+import os
+import subprocess
+
 from queries.query import Query
 from word_batch import WordBatchManager
 
@@ -25,3 +28,4 @@ class HistoryDeleteQuery(Query):
     def command_select(self, command: str, *args, **kwargs):
         if command == 'delHis':
             HistoryDeleteQuery.__history_delete(args[0])
+            subprocess.run("cls" if os.name == "nt" else "clear", shell=True)

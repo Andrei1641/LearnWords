@@ -1,3 +1,6 @@
+import os
+import subprocess
+
 from queries.query import Query
 from word_batch import WordBatchManager
 
@@ -25,3 +28,4 @@ class HistoryAddQuery(Query):
     def command_select(self, command: str, *args, **kwargs):
         if command == 'hisAdd':
             HistoryAddQuery.__history_add(args[0])
+            subprocess.run("cls" if os.name == "nt" else "clear", shell=True)

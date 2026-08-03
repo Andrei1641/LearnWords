@@ -1,3 +1,6 @@
+import os
+import subprocess
+
 from queries.query import Query
 
 class QueryRequest:
@@ -21,6 +24,7 @@ class QueryRequest:
             self.print_prompts()
             print('type q to quit')
             command = input('your request: ')
+            subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
             self.search_query(command)
             if command == 'q':
                 select = False

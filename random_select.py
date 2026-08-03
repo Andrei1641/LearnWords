@@ -1,4 +1,7 @@
+import os
 import random
+import subprocess
+
 
 class RandomIndex:
     def __init__(self, i_len: int):
@@ -44,6 +47,7 @@ class RandomLearn:
     @staticmethod
     def learn(foreign_words: list[str], local_words: list[str]):
         mode_request:str = input('select learning mode(l-f or f-l): ')
+        subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
 
         random_select: RandomIndex = RandomIndex(len(foreign_words))
 
@@ -60,8 +64,9 @@ class RandomLearn:
         else:
             print(f'there is no such a mode{mode_request} there is (f-l, l-f)')
             random_select.reset_indexes()
-
+        print()
         while random_select.indexes:
+            print(f'({len(random_select.indexes)} words left)')
             random_select.set_random_index()
             if mode_request == 'l-f':
                 RandomLearn.__learn_sequence(local_words, foreign_words, random_select.tmp_index)
@@ -74,3 +79,5 @@ class RandomLearn:
                 random_select.delete_index()
             elif command == 'q':
                 random_select.reset_indexes()
+
+            subprocess.run("cls" if os.name == "nt" else "clear", shell=True)

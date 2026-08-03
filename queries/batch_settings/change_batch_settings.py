@@ -1,3 +1,6 @@
+import os
+import subprocess
+
 from queries.query import Query
 from pathlib import Path
 
@@ -38,3 +41,4 @@ class ChangeBatchSettingsQuery(Query):
         if command == 'cbs':
             batch_name: str = input('print name of batch, you want to work with: ')
             self.__change_batch_setting(batch_name)
+            subprocess.run("cls" if os.name == "nt" else "clear", shell=True)

@@ -1,3 +1,6 @@
+import os
+import subprocess
+
 from queries.batch_settings.history_add import HistoryAddQuery
 from queries.query import Query
 from random_select import RandomLearn
@@ -13,9 +16,9 @@ class LearnWordsQuery(Query):
 
         for batch_name in batch_names:
             select_t_m = SelectTextFileManager()
-            text_manager = select_t_m.select(batch_name)
             words_set: set[tuple[str, str]] = set()
             try:
+                text_manager = select_t_m.select(batch_name)
                 words_set = text_manager.create_word_set()
             except (ValueError, FileNotFoundError) as e:
                 print(e)
@@ -53,3 +56,4 @@ class LearnWordsQuery(Query):
         if command == 'lw':
             raw_names: str = input('write batch names you want to learn: ')
             LearnWordsQuery.__learn_words(raw_names)
+            subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
