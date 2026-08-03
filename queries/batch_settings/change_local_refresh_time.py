@@ -24,8 +24,9 @@ class ChangeLocalRefreshTime(Query):
             new_refresh_times = input('new refresh times: ')
             new_refresh_times = new_refresh_times.replace(' ', '')
             new_refresh_times = new_refresh_times.split(',')
-
-            time_list: list[int] = [int(t) for t in new_refresh_times]
-
-            ChangeLocalRefreshTime.__change(args[0], time_list)
-            subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
+            try:
+                time_list: list[int] = [int(t) for t in new_refresh_times]
+                ChangeLocalRefreshTime.__change(args[0], time_list)
+                subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
+            except ValueError:
+                print('false query')

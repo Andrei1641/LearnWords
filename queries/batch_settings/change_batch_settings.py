@@ -11,7 +11,6 @@ class ChangeBatchSettingsQuery(Query):
         self.__queries: list[Query] = queries
 
 
-
     def __change_batch_setting(self, batch_name: str):
         path: Path = Path(f'words/{batch_name}')
 
