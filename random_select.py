@@ -69,9 +69,9 @@ class RandomLearn:
             print(f'({len(random_select.indexes)} words left)')
             random_select.set_random_index()
             if mode_request == 'l-f':
-                RandomLearn.__learn_sequence(local_words, foreign_words, random_select.tmp_index)
+                RandomLearn.__learn_sequence(local_words, foreign_words, random_select.indexes[random_select.tmp_index])
             elif mode_request == 'f-l':
-                RandomLearn.__learn_sequence(foreign_words, local_words, random_select.tmp_index)
+                RandomLearn.__learn_sequence(foreign_words, local_words, random_select.indexes[random_select.tmp_index])
 
 
             command = input('print 0 to delete or just press enter to continue(q to quit): ')

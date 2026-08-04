@@ -49,6 +49,11 @@ class ChangeBatchWordsQuery(Query):
                 except IndexError:
                     print('false form')
 
+                    try:
+                        text_manager.write_text_file(lists_manager.words_set)
+                    except (FileNotFoundError, AttributeError):
+                        pass
+
                 command: str = input(f'press enter to continue {select_change_mode}, or q to exit: ')
                 subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
                 if command == 'q':
